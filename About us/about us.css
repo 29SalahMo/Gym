@@ -1,0 +1,317 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap');
+
+:root {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --accent-gradient: linear-gradient(135deg, #ff6b00 0%, #ff8e53 100%);
+  --accent-color: #ff6b00;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --card-bg: rgba(30, 41, 59, 0.7);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --shadow-premium: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-primary);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(255, 107, 0, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(28, 70, 184, 0.15) 0px, transparent 50%),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95)),
+    url('backgroundgym.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  color: var(--text-main);
+  font-family: 'Outfit', sans-serif;
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Navigation (Synchronized with Home page) */
+nav {
+  width: 100%;
+  height: 90px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8%;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--card-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+nav .logo {
+  font-size: 28px;
+  font-weight: 800;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 15px;
+}
+
+nav ul li a {
+  color: var(--text-main);
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+nav ul li a:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--accent-color);
+}
+
+nav .menubtn {
+  font-size: 28px;
+  cursor: pointer;
+  display: none;
+  color: var(--text-main);
+  transition: var(--transition);
+}
+
+nav .menubtn:hover {
+  color: var(--accent-color);
+}
+
+/* About Us Layout Container */
+.about-container {
+  max-width: 1000px;
+  margin: 60px auto;
+  padding: 0 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+/* Section Card */
+.about-section, .goal-section {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  padding: 45px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-premium);
+}
+
+.about-section {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+}
+
+.about-text {
+  flex: 1.2;
+}
+
+.about-text h1, .goal-section h1 {
+  font-size: 36px;
+  font-weight: 800;
+  margin-bottom: 20px;
+  letter-spacing: -1px;
+}
+
+.about-text h1 {
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.about-text p {
+  font-size: 17px;
+  color: var(--text-muted);
+  font-weight: 300;
+  line-height: 1.7;
+}
+
+.about-img-wrapper {
+  flex: 0.8;
+  display: flex;
+  justify-content: center;
+}
+
+.about-img-wrapper img {
+  width: 250px;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  transition: var(--transition);
+}
+
+.about-img-wrapper img:hover {
+  transform: scale(1.03) rotate(1deg);
+  border-color: var(--accent-color);
+}
+
+/* Goal List Style */
+.goal-section h1 {
+  color: var(--text-main);
+  position: relative;
+  display: inline-block;
+}
+
+.goal-section h1::after {
+  content: '';
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: var(--accent-gradient);
+  border-radius: 2px;
+}
+
+.goal-section ul {
+  list-style: none;
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.goal-section ul li {
+  font-size: 16px;
+  color: var(--text-muted);
+  position: relative;
+  padding-left: 30px;
+  line-height: 1.6;
+}
+
+.goal-section ul li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0;
+  color: var(--accent-color);
+  font-weight: 800;
+  font-size: 18px;
+}
+
+.goal-section ul li strong {
+  color: var(--text-main);
+}
+
+/* Responsive Queries */
+@media screen and (max-width: 768px) {
+  nav .menubtn {
+    display: block;
+  }
+
+  nav .navLinks {
+    position: fixed;
+    top: 90px;
+    left: 0;
+    width: 100%;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--card-border);
+    padding: 30px;
+    display: none;
+    z-index: 99;
+  }
+
+  nav .navLinks.active {
+    display: block;
+  }
+
+  nav ul {
+    flex-direction: column;
+    width: 100%;
+    text-align: center;
+    gap: 20px;
+  }
+
+  nav ul li a {
+    display: block;
+    font-size: 18px;
+  }
+
+  .about-section {
+    flex-direction: column-reverse;
+    text-align: center;
+    padding: 35px 25px;
+  }
+
+  .about-img-wrapper img {
+    width: 200px;
+    height: 200px;
+  }
+
+}
+
+/* Interactive Cursor Glow */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 107, 0, 0.07) 0%, rgba(28, 70, 184, 0.03) 40%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+/* Background Scroll Parallax Dumbbell */
+.scroll-dumbbell {
+  position: fixed;
+  top: 25%;
+  right: -5%;
+  width: 450px;
+  height: 450px;
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: -1;
+  fill: none;
+  stroke: var(--text-main);
+  stroke-width: 1.5;
+  stroke-dasharray: 4;
+  will-change: transform;
+}
+
+/* Scroll Reveal Elements */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(40px) scale(0.98);
+  transition: opacity 0.85s cubic-bezier(0.25, 1, 0.5, 1), transform 0.85s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.reveal-on-scroll.reveal-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Scroll delay utilities */
+.reveal-delay-100 { transition-delay: 100ms; }
+.reveal-delay-200 { transition-delay: 200ms; }
+.reveal-delay-300 { transition-delay: 300ms; }
+

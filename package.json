@@ -1,0 +1,16 @@
+{
+  "name": "gym-buddy-backend",
+  "version": "1.0.0",
+  "description": "Interactive Gym Buddy backend server in Node.js with SQLite",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "express": "^4.19.2",
+    "sqlite3": "^5.1.7"
+  },
+  "private": true
+}

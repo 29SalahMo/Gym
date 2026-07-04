@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Workout and diet plan</title>
+  <meta charset='utf-8'>
+  <meta name="descreption" content="this is the pig store and free training for gain muscels">
+  <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+  <meta name='viewport' content='width=device-width, initial-scale=1'>
+  <script src='main.js'></script>
+  <script src="../Home/interactions.js" defer></script>
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+  <!-- Parallax Background Dumbbell Shape -->
+  <svg class="scroll-dumbbell" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect x="15" y="30" width="10" height="40" rx="3" />
+    <rect x="23" y="25" width="8" height="50" rx="3" />
+    <rect x="31" y="45" width="38" height="10" rx="1" />
+    <rect x="69" y="25" width="8" height="50" rx="3" />
+    <rect x="75" y="30" width="10" height="40" rx="3" />
+  </svg>
+  <!-- Cohesive Navigation Header -->
+  <nav>
+    <div class="logo"><a href="../Home/assig.html" style="text-decoration:none; color:inherit;">Gym buddy</a></div>
+
+    <span class="menubtn" onclick="openNav()">&#9776;</span>
+
+    <div class="navLinks">
+      <ul>
+        <li><a href="../Home/assig.html">Home</a></li>
+        <li><a href="../About us/about us.html">About Us</a></li>
+        <li><a href="Workout plan and Diet plan.html">BMI Calculator</a></li>
+      </ul>
+    </div>
+  </nav>
+  <div class="reveal-on-scroll">
+    <h1>Make a suitable Diet and workout for you</h1>
+    <br>
+    <p id="first"><b>Gym buddy for helping people to make a good plan without cost</b></p>
+  </div>
+  <br><br>
+
+  <p class="reveal-on-scroll reveal-delay-100">Please enter your information below to customize your training plan and
+    calculate your BMR daily calories.</p>
+
+  <div class="calculator-container">
+    <!-- Membership Details Form -->
+    <div class="Info reveal-on-scroll">
+      <h2>Membership Info</h2>
+      <form action="index.php" method="post">
+        <label for="id">Member ID</label>
+        <input type="number" id="id" name="id" placeholder="Enter ID" required>
+
+        <label for="firstname">First Name</label>
+        <input type="text" id="firstname" name="firstname" placeholder="First Name" required>
+
+        <label for="lastname">Last Name</label>
+        <input type="text" id="lastname" name="lastname" placeholder="Last Name" required>
+
+        <label>Gender</label>
+        <div class="gender-selection">
+          <div>
+            <input type="radio" name="gender" value="m" id="male" required>
+            <label for="male">Male</label>
+          </div>
+          <div>
+            <input type="radio" name="gender" value="f" id="female">
+            <label for="female">Female</label>
+          </div>
+        </div>
+
+        <div class="form-actions">
+          <input id="Submitbutton" type="submit" value="Submit Info">
+          <input class="Clearbutton" type="reset" value="Clear">
+        </div>
+      </form>
+    </div>
+
+    <div class="calorie reveal-on-scroll reveal-delay-200">
+      <h2>Calorie Calculator</h2>
+      <img src="images.jpg" alt="Nutrition Guide">
+
+      <form id="calorie-form">
+        <label for="age">Age (From 15 to 80)</label>
+        <input type="number" id="age" name="Age" placeholder="Enter Age" min="15" max="80" required>
+
+        <label for="height">Height (CM)</label>
+        <input type="number" id="height" name="Height" placeholder="Height in CM" required>
+
+        <label for="weight">Weight (KG)</label>
+        <input type="number" id="weight" name="weight" placeholder="Weight in KG" required>
+
+        <label for="activity">Activity Level</label>
+        <select id="list">
+          <option selected value="1">Sedentary (little or no exercise)</option>
+          <option value="2">Lightly active (light exercise/sports 1-3 days/week)</option>
+          <option value="3">Moderately active (moderate exercise/sports 3-5 days/week)</option>
+          <option value="4">Very active (hard exercise/sports 6-7 days a week)</option>
+          <option value="5">Extra active (very hard exercise/sports & physical job)</option>
+        </select>
+
+        <div class="form-actions">
+          <input id="Calculatebutton" type="submit" value="Calculate">
+          <input class="Clearbutton" type="reset" value="Clear">
+        </div>
+      </form>
+    </div>
+  </div>
+  <hr>
+  <hr>
+
+  <div class="calc reveal-on-scroll">
+    <!-- Loader -->
+    <div id="loading" style="display: none; text-align: center; padding: 30px;">
+      <h4 style="color: var(--text-muted); margin-top: 15px;">Calculating your custom fitness dashboard...</h4>
+    </div>
+
+    <!-- Results Dashboard -->
+    <div id="results" style="display: none;">
+      <div class="dashboard-header">
+        <h2>Your Fitness Dashboard</h2>
+        <p>Calculations & target planning tailored to your metrics</p>
+      </div>
+
+      <div class="dashboard-grid">
+        <!-- Card 1: Calories & Math -->
+        <div class="metric-card main-calorie-card">
+          <span class="card-label">DAILY TDEE TARGET</span>
+          <div class="calorie-display">
+            <span id="display-calories">0</span>
+            <span class="unit">kcal / day</span>
+          </div>
+          
+          <div class="bmr-math-box">
+            <h4>Harris-Benedict Math Steps:</h4>
+            <div id="bmr-formula-text" class="formula-line">BMR = Loading...</div>
+            <div id="tdee-formula-text" class="formula-line">TDEE = BMR * Activity Multiplier</div>
+          </div>
+        </div>
+
+        <!-- Card 2: Goal Selector -->
+        <div class="metric-card">
+          <h3>Adjust Fitness Goal</h3>
+          <p style="text-align: left; font-size: 14px; margin-bottom: 15px; color: var(--text-muted);">Toggling adjusts target calories and macro ratios:</p>
+          <div class="goal-toggles">
+            <button class="goal-btn active" id="goal-maintain" onclick="changeGoal('maintain')">
+              <strong>Maintenance</strong>
+              <span>Keep current weight</span>
+            </button>
+            <button class="goal-btn" id="goal-lose" onclick="changeGoal('lose')">
+              <strong>Fat Loss</strong>
+              <span>500 kcal deficit</span>
+            </button>
+            <button class="goal-btn" id="goal-gain" onclick="changeGoal('gain')">
+              <strong>Muscle Gain</strong>
+              <span>400 kcal surplus</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Card 3: Macronutrients split -->
+        <div class="metric-card macro-card">
+          <h3>Target Macronutrients</h3>
+          <div class="macro-bars">
+            <div class="macro-item">
+              <div class="macro-info">
+                <span>Protein (4 kcal/g)</span>
+                <strong id="macro-protein-val">0g</strong>
+              </div>
+              <div class="progress-bar"><div class="bar protein-bar" id="macro-protein-bar" style="width: 0%"></div></div>
+            </div>
+            
+            <div class="macro-item">
+              <div class="macro-info">
+                <span>Carbs (4 kcal/g)</span>
+                <strong id="macro-carbs-val">0g</strong>
+              </div>
+              <div class="progress-bar"><div class="bar carbs-bar" id="macro-carbs-bar" style="width: 0%"></div></div>
+            </div>
+            
+            <div class="macro-item">
+              <div class="macro-info">
+                <span>Fats (9 kcal/g)</span>
+                <strong id="macro-fats-val">0g</strong>
+              </div>
+              <div class="progress-bar"><div class="bar fats-bar" id="macro-fats-bar" style="width: 0%"></div></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Dynamic Recommenders -->
+        <div class="metric-card advice-card">
+          <div class="advice-tabs">
+            <button class="advice-tab active" id="tab-diet" onclick="switchAdvice('diet')">Diet Structure</button>
+            <button class="advice-tab" id="tab-workout" onclick="switchAdvice('workout')">Workout Regimen</button>
+          </div>
+          
+          <div class="advice-content">
+            <div id="advice-diet-pane">
+              <ul class="suggestion-list" id="diet-suggestions-list">
+                <!-- Injected Meal recommendations -->
+              </ul>
+            </div>
+            <div id="advice-workout-pane" style="display: none;">
+              <ul class="suggestion-list" id="workout-suggestions-list">
+                <!-- Injected Exercise suggestions -->
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function openNav() {
+      const navLinks = document.querySelector(".navLinks");
+      navLinks.classList.toggle("active");
+    }
+  </script>
+</body>
+
+</html>

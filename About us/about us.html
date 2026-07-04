@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us - Gym Buddy</title>
+  <link rel="stylesheet" href="about us.css">
+  <script src="../Home/interactions.js" defer></script>
+</head>
+
+<body>
+  <!-- Parallax Background Dumbbell Shape -->
+  <svg class="scroll-dumbbell" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect x="15" y="30" width="10" height="40" rx="3" />
+    <rect x="23" y="25" width="8" height="50" rx="3" />
+    <rect x="31" y="45" width="38" height="10" rx="1" />
+    <rect x="69" y="25" width="8" height="50" rx="3" />
+    <rect x="75" y="30" width="10" height="40" rx="3" />
+  </svg>
+
+  <!-- Cohesive Navigation Header -->
+  <nav>
+    <div class="logo"><a href="../Home/assig.html" style="text-decoration:none; color:inherit;">Gym buddy</a></div>
+
+    <span class="menubtn" onclick="openNav()">&#9776;</span>
+
+    <div class="navLinks">
+      <ul>
+        <li><a href="../Home/assig.html">Home</a></li>
+        <li><a href="about us.html">About Us</a></li>
+        <li><a href="../Core/Workout plan and Diet plan.html">BMI Calculator</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="about-container">
+    <!-- About Us Section -->
+    <div class="about-section reveal-on-scroll">
+      <div class="about-text">
+        <h1>About Us</h1>
+        <p>
+          Gymbuddy is an intuitive, accessible platform designed to help you extract maximum value from your training
+          routines. Whether you are looking to master new exercises, formulate comprehensive meal strategies, or
+          calculate BMR requirements, Gymbuddy offers standard fitness analytics to simplify your journey.
+        </p>
+      </div>
+      <div class="about-img-wrapper">
+        <img id="gymf" src="aboutr.png" alt="Gym Buddy Training">
+      </div>
+    </div>
+
+    <!-- Our Goal Section -->
+    <div class="goal-section reveal-on-scroll reveal-delay-200">
+      <h1>Our Goal</h1>
+      <ul>
+        <li><strong>Encourage Progress:</strong> Motivate fitness enthusiasts and novices alike to commit to a healthier
+          daily routine.</li>
+        <li><strong>Foster Independence:</strong> Guide members to self-manage workouts and calculate optimal body
+          nutritional metrics.</li>
+        <li><strong>Boost Motivation:</strong> Fuel personal discipline with structured targets to systematically reach
+          physical checkpoints.</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    function openNav() {
+      const navLinks = document.querySelector(".navLinks");
+      navLinks.classList.toggle("active");
+    }
+  </script>
+</body>
+
+</html>

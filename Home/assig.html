@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="myst1.css" />
+  <script src="interactions.js" defer></script>
+  <title>Gym buddy</title>
+</head>
+
+<body>
+  <!-- Parallax Background Dumbbell Shape -->
+  <svg class="scroll-dumbbell" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <rect x="15" y="30" width="10" height="40" rx="3" />
+    <rect x="23" y="25" width="8" height="50" rx="3" />
+    <rect x="31" y="45" width="38" height="10" rx="1" />
+    <rect x="69" y="25" width="8" height="50" rx="3" />
+    <rect x="75" y="30" width="10" height="40" rx="3" />
+  </svg>
+
+  <nav>
+    <div class="logo"><a href="assig.html" style="text-decoration:none; color:inherit;">Gym buddy</a></div>
+
+    <span class="menubtn" onclick="openNav()">&#9776;</span>
+
+    <div class="navLinks">
+      <ul>
+        <li><a href="assig.html">Home</a></li>
+        <li><a href="../About us/about us.html">About Us</a></li>
+        <li><a href="../Core/Workout plan and Diet plan.html">BMI Calculator</a></li>
+        <li><button class="open-button" onclick="openForm()">Login</button></li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="hero-container">
+    <div class="row">
+      <div class="column1">
+        <h1 class="reveal-on-scroll">New lifestyle for free</h1>
+        <p class="reveal-on-scroll reveal-delay-100">Go to our services now to start</p>
+        <button class="cta-btn reveal-on-scroll reveal-delay-200"
+          onclick="window.location.href='../Core/Workout plan and Diet plan.html'">Start now</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="features-grid">
+    <div class="feature-card reveal-on-scroll">
+      <img src="lookinBodyWebHeroImgOpt.png" alt="Body Composition">
+      <h3>Body Analysis</h3>
+      <p>Track metrics and understand your target body goals.</p>
+    </div>
+    <div class="feature-card reveal-on-scroll reveal-delay-100">
+      <img src="1131w-NRG2fNRtJVQ.webp" alt="Workout Planning">
+      <h3>Custom Training</h3>
+      <p>Follow expert strength and aerobic routines for free.</p>
+    </div>
+    <div class="feature-card reveal-on-scroll reveal-delay-200">
+      <img src="diet-plan-cartoon-illustration-with-different-useful-dishes-menu-sheet-woman-hands_1284-28268.webp"
+        alt="Diet Planning">
+      <h3>Dietary Support</h3>
+      <p>Get custom recipes and meal plans tailored to your calculations.</p>
+    </div>
+  </div>
+
+  <!-- Auth Modal Popup -->
+  <div class="modal-overlay" id="modalOverlay" onclick="closeForm()"></div>
+  <div class="form-popup" id="myForm">
+    <div class="auth-tabs">
+      <button class="auth-tab active" id="tabLogin" onclick="setAuthMode('login')">Login</button>
+      <button class="auth-tab" id="tabSignup" onclick="setAuthMode('signup')">Sign Up</button>
+    </div>
+
+    <form action="contex.php" method="post" class="form-container" id="authForm">
+      <h1 id="authTitle">Member Login</h1>
+
+      <input type="hidden" name="action" id="authAction" value="login">
+
+      <div class="signup-only">
+        <label for="fullName"><b>Full Name</b></label>
+        <input type="text" placeholder="Enter Full Name" name="fullname" id="fullName">
+      </div>
+
+      <label for="email"><b>Email</b></label>
+      <input type="text" placeholder="Enter Email" name="email" required>
+
+      <label for="psw"><b>Password</b></label>
+      <input type="password" placeholder="Enter Password" name="password" required>
+
+      <div class="signup-only">
+        <label for="confirmPsw"><b>Confirm Password</b></label>
+        <input type="password" placeholder="Confirm Password" name="confirm_password" id="confirmPsw">
+      </div>
+
+      <button type="submit" class="btn" id="authSubmitBtn">Login</button>
+      <button type="button" class="btn cancel" onclick="closeForm()">Close</button>
+    </form>
+  </div>
+
+  <script>
+    function openForm() {
+      document.getElementById("myForm").style.display = "block";
+      document.getElementById("modalOverlay").style.display = "block";
+    }
+
+    function closeForm() {
+      document.getElementById("myForm").style.display = "none";
+      document.getElementById("modalOverlay").style.display = "none";
+    }
+
+    function openNav() {
+      const navLinks = document.querySelector(".navLinks");
+      navLinks.classList.toggle("active");
+    }
+
+    function setAuthMode(mode) {
+      const modal = document.getElementById("myForm");
+      const title = document.getElementById("authTitle");
+      const action = document.getElementById("authAction");
+      const submitBtn = document.getElementById("authSubmitBtn");
+      const tabLogin = document.getElementById("tabLogin");
+      const tabSignup = document.getElementById("tabSignup");
+
+      const nameInput = document.getElementById("fullName");
+      const confirmPsw = document.getElementById("confirmPsw");
+
+      if (mode === "signup") {
+        modal.classList.add("auth-mode-signup");
+        title.textContent = "Create Account";
+        action.value = "signup";
+        submitBtn.textContent = "Sign Up";
+        tabLogin.classList.remove("active");
+        tabSignup.classList.add("active");
+        nameInput.required = true;
+        confirmPsw.required = true;
+      } else {
+        modal.classList.remove("auth-mode-signup");
+        title.textContent = "Member Login";
+        action.value = "login";
+        submitBtn.textContent = "Login";
+        tabLogin.classList.add("active");
+        tabSignup.classList.remove("active");
+        nameInput.required = false;
+        confirmPsw.required = false;
+      }
+    }
+  </script>
+</body>
+
+</html>

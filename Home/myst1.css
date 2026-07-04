@@ -1,0 +1,479 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700;800&display=swap');
+
+:root {
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --accent-gradient: linear-gradient(135deg, #ff6b00 0%, #ff8e53 100%);
+  --accent-color: #ff6b00;
+  --accent-hover: #e05e00;
+  --text-main: #f8fafc;
+  --text-muted: #94a3b8;
+  --card-bg: rgba(30, 41, 59, 0.7);
+  --card-border: rgba(255, 255, 255, 0.08);
+  --shadow-premium: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+  --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: var(--bg-primary);
+  background-image: 
+    radial-gradient(at 0% 0%, rgba(255, 107, 0, 0.15) 0px, transparent 50%),
+    radial-gradient(at 100% 100%, rgba(28, 70, 184, 0.15) 0px, transparent 50%),
+    linear-gradient(to bottom, rgba(15, 23, 42, 0.9), rgba(15, 23, 42, 0.95)),
+    url('dumbbells-shelf-workout-gym-copy-space-blurred-gym-background-preparation-gym-exercises-workout-gym-161393354.jpg');
+  background-size: cover;
+  background-attachment: fixed;
+  background-position: center;
+  color: var(--text-main);
+  font-family: 'Outfit', sans-serif;
+  min-height: 100vh;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* Header & Nav */
+nav {
+  width: 100%;
+  height: 90px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 8%;
+  background: rgba(15, 23, 42, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--card-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+}
+
+nav .logo {
+  font-size: 28px;
+  font-weight: 800;
+  background: var(--accent-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  letter-spacing: -0.5px;
+}
+
+nav ul {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  gap: 15px;
+}
+
+nav ul li a {
+  color: var(--text-main);
+  font-size: 16px;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: var(--transition);
+}
+
+nav ul li a:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--accent-color);
+}
+
+/* Menu Toggle Button */
+nav .menubtn {
+  font-size: 28px;
+  cursor: pointer;
+  display: none;
+  color: var(--text-main);
+  transition: var(--transition);
+}
+
+nav .menubtn:hover {
+  color: var(--accent-color);
+}
+
+/* CTA & Buttons */
+.open-button {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: var(--text-main);
+  padding: 10px 24px;
+  border-radius: 30px;
+  font-weight: 600;
+  font-size: 15px;
+  cursor: pointer;
+  transition: var(--transition);
+}
+
+.open-button:hover {
+  background: var(--text-main);
+  color: var(--bg-primary);
+  transform: translateY(-2px);
+}
+
+.cta-btn {
+  background: var(--accent-gradient);
+  border: none;
+  color: white;
+  padding: 14px 32px;
+  border-radius: 30px;
+  font-weight: 700;
+  font-size: 16px;
+  cursor: pointer;
+  box-shadow: 0 4px 15px rgba(255, 107, 0, 0.4);
+  transition: var(--transition);
+}
+
+.cta-btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 6px 20px rgba(255, 107, 0, 0.6);
+}
+
+/* Hero Section */
+.hero-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 100px 8% 60px 8%;
+  min-height: 50vh;
+}
+
+.row {
+  max-width: 800px;
+  text-align: center;
+}
+
+.column1 h1 {
+  font-size: 64px;
+  font-weight: 800;
+  line-height: 1.15;
+  margin-bottom: 20px;
+  letter-spacing: -1.5px;
+}
+
+.column1 p {
+  font-size: 22px;
+  color: var(--text-muted);
+  margin-bottom: 35px;
+  font-weight: 300;
+}
+
+/* Features Grid */
+.features-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 30px;
+  padding: 40px 8% 80px 8%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.feature-card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 35px 25px;
+  text-align: center;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: var(--shadow-premium);
+  transition: var(--transition);
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  border-color: rgba(255, 107, 0, 0.3);
+  box-shadow: 0 15px 40px -10px rgba(255, 107, 0, 0.25);
+}
+
+.feature-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  margin-bottom: 25px;
+  transition: var(--transition);
+}
+
+.feature-card:hover img {
+  transform: scale(1.02);
+}
+
+.feature-card h3 {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 12px;
+}
+
+.feature-card p {
+  color: var(--text-muted);
+  font-size: 15px;
+  font-weight: 400;
+}
+
+/* Modal Overlay & Login Modal */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(15, 23, 42, 0.75);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  z-index: 998;
+  animation: fadeIn 0.3s ease;
+}
+
+.form-popup {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 400px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--card-border);
+  border-radius: 24px;
+  padding: 40px 30px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+  z-index: 999;
+  animation: modalScale 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.form-container h1 {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 25px;
+  text-align: center;
+  letter-spacing: -0.5px;
+}
+
+.form-container label {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--text-muted);
+  display: block;
+  margin-bottom: 8px;
+}
+
+.form-container input[type=text], 
+.form-container input[type=password] {
+  width: 100%;
+  padding: 14px 18px;
+  margin-bottom: 20px;
+  border: 1px solid var(--card-border);
+  background: rgba(15, 23, 42, 0.4);
+  color: white;
+  border-radius: 12px;
+  font-family: inherit;
+  font-size: 15px;
+  transition: var(--transition);
+}
+
+.form-container input[type=text]:focus, 
+.form-container input[type=password]:focus {
+  border-color: var(--accent-color);
+  outline: none;
+  background: rgba(15, 23, 42, 0.6);
+  box-shadow: 0 0 0 3px rgba(255, 107, 0, 0.2);
+}
+
+.form-container .btn {
+  background: var(--accent-gradient);
+  color: white;
+  padding: 14px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  width: 100%;
+  font-size: 16px;
+  font-weight: 700;
+  margin-bottom: 12px;
+  transition: var(--transition);
+}
+
+.form-container .btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(255, 107, 0, 0.3);
+}
+
+.form-container .cancel {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid var(--card-border);
+  color: var(--text-main);
+  margin-bottom: 0;
+}
+
+.form-container .cancel:hover {
+  background: rgba(255, 255, 255, 0.1);
+  box-shadow: none;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes modalScale {
+  from { transform: translate(-50%, -50%) scale(0.9); opacity: 0; }
+  to { transform: translate(-50%, -50%) scale(1); opacity: 1; }
+}
+
+/* Responsive Styles */
+@media screen and (max-width: 980px) {
+  .column1 h1 {
+    font-size: 52px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  nav {
+    padding: 0 5%;
+  }
+
+  nav .menubtn {
+    display: block;
+  }
+
+  nav .navLinks {
+    position: fixed;
+    top: 90px;
+    left: 0;
+    width: 100%;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid var(--card-border);
+    padding: 30px;
+    display: none;
+    z-index: 99;
+  }
+
+  nav .navLinks.active {
+    display: block;
+    animation: fadeIn 0.2s ease;
+  }
+
+  nav ul {
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    text-align: center;
+    gap: 20px;
+  }
+
+  nav ul li a {
+    display: block;
+    font-size: 18px;
+    padding: 10px;
+  }
+
+  .open-button {
+    width: 100%;
+    padding: 12px;
+  }
+
+  .column1 h1 {
+    font-size: 40px;
+  }
+  
+  .column1 p {
+    font-size: 18px;
+  }
+}
+
+/* Interactive Cursor Glow */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(255, 107, 0, 0.07) 0%, rgba(28, 70, 184, 0.03) 40%, transparent 70%);
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+  mix-blend-mode: screen;
+  will-change: transform;
+}
+
+/* Background Scroll Parallax Dumbbell */
+.scroll-dumbbell {
+  position: fixed;
+  top: 25%;
+  right: -5%;
+  width: 450px;
+  height: 450px;
+  opacity: 0.03;
+  pointer-events: none;
+  z-index: -1;
+  fill: none;
+  stroke: var(--text-main);
+  stroke-width: 1.5;
+  stroke-dasharray: 4;
+  will-change: transform;
+}
+
+/* Scroll Reveal Elements */
+.reveal-on-scroll {
+  opacity: 0;
+  transform: translateY(40px) scale(0.98);
+  transition: opacity 0.85s cubic-bezier(0.25, 1, 0.5, 1), transform 0.85s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.reveal-on-scroll.reveal-active {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Scroll delay utilities */
+.reveal-delay-100 { transition-delay: 100ms; }
+.reveal-delay-200 { transition-delay: 200ms; }
+.reveal-delay-300 { transition-delay: 300ms; }
+
+/* Auth Modal Tabs Overhaul */
+.auth-tabs {
+  display: flex;
+  margin-bottom: 25px;
+  border-bottom: 1px solid var(--card-border);
+}
+
+.auth-tab {
+  flex: 1;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: inherit;
+  font-size: 16px;
+  font-weight: 600;
+  padding: 12px;
+  cursor: pointer;
+  transition: var(--transition);
+  text-align: center;
+}
+
+.auth-tab.active {
+  color: var(--accent-color);
+  border-bottom: 3px solid var(--accent-color);
+}
+
+.signup-only {
+  display: none;
+  transition: var(--transition);
+}
+
+/* When signup mode is active */
+.form-popup.auth-mode-signup .signup-only {
+  display: block;
+  animation: fadeIn 0.3s ease;
+}
