@@ -1,6 +1,7 @@
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const path = require('path');
+const fs = require('fs');
 const bcrypt = require('bcryptjs');
 
 const app = express();
@@ -52,13 +53,82 @@ function runMigrations() {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Serve static assets (HTML, CSS, JS, images)
-app.use(express.static(__dirname));
+function getBaseUrl(req) {
+  const host = req.get('x-forwarded-host') || req.get('host');
+  const protocol = req.get('x-forwarded-proto') || req.protocol || 'https';
+  return `${protocol}://${host}`;
+}
 
-// Default route fallback to homepage
-app.get('/', (req, res) => {
-  res.redirect('/Home/assig.html');
+function buildHeadMeta(req, { title, description }) {
+  const baseUrl = getBaseUrl(req);
+  const pageUrl = `${baseUrl}${req.originalUrl === '/' ? '/Home/assig.html' : req.originalUrl}`;
+  const imageUrl = `${baseUrl}/assets/og-image.png`;
+
+  return `
+  <link rel="icon" href="/assets/favicon.svg" type="image/svg+xml">
+  <link rel="icon" href="/assets/favicon.png" type="image/png" sizes="512x512">
+  <link rel="apple-touch-icon" href="/assets/favicon.png">
+  <link rel="manifest" href="/assets/site.webmanifest">
+  <meta name="theme-color" content="#ff6b00">
+  <meta name="description" content="${description}">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Gym Buddy">
+  <meta property="og:title" content="${title}">
+  <meta property="og:description" content="${description}">
+  <meta property="og:image" content="${imageUrl}">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:url" content="${pageUrl}">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="${title}">
+  <meta name="twitter:description" content="${description}">
+  <meta name="twitter:image" content="${imageUrl}">`;
+}
+
+function serveHtmlPage(req, res, filePath, meta) {
+  const absolutePath = path.join(__dirname, filePath);
+  if (!fs.existsSync(absolutePath)) {
+    return res.status(404).send('Page not found');
+  }
+
+  const html = fs.readFileSync(absolutePath, 'utf8');
+  const headMeta = buildHeadMeta(req, meta);
+  const enriched = html.includes('</head>')
+    ? html.replace('</head>', `${headMeta}\n</head>`)
+    : `${headMeta}${html}`;
+
+  res.type('html').send(enriched);
+}
+
+const htmlPages = [
+  {
+    routes: ['/', '/Home/assig.html'],
+    file: 'Home/assig.html',
+    title: 'Gym Buddy - Free Workout & Diet Plans',
+    description: 'Custom training routines, BMI calculator, and free diet plans to reach your fitness goals.'
+  },
+  {
+    routes: ['/Core/Workout plan and Diet plan.html'],
+    file: 'Core/Workout plan and Diet plan.html',
+    title: 'Workout & Diet Plan - Gym Buddy',
+    description: 'Calculate your BMI and get personalized workout and diet recommendations for free.'
+  },
+  {
+    routes: ['/About us/about us.html'],
+    file: 'About us/about us.html',
+    title: 'About Us - Gym Buddy',
+    description: 'Learn about Gym Buddy and our mission to help people train and eat better for free.'
+  }
+];
+
+htmlPages.forEach(({ routes, file, title, description }) => {
+  routes.forEach((route) => {
+    app.get(route, (req, res) => serveHtmlPage(req, res, file, { title, description }));
+  });
 });
+
+// Serve static assets (CSS, JS, images — HTML is served above with meta tags)
+app.use(express.static(__dirname));
 
 // Intercept routing for PHP endpoints
 // 1. Home contex.php (Login / Signup)

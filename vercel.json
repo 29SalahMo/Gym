@@ -5,8 +5,12 @@
       "src": "server.js",
       "use": "@vercel/node",
       "config": {
-        "includeFiles": ["Home/**", "Core/**", "About us/**"]
+        "includeFiles": ["Home/**", "Core/**", "About us/**", "assets/**"]
       }
+    },
+    {
+      "src": "assets/**",
+      "use": "@vercel/static"
     },
     {
       "src": "Home/**",
@@ -33,14 +37,23 @@
       "dest": "server.js"
     },
     {
-      "handle": "filesystem"
+      "src": "/",
+      "dest": "server.js"
     },
     {
-      "src": "/",
-      "status": 307,
-      "headers": {
-        "Location": "/Home/assig.html"
-      }
+      "src": "/Home/assig.html",
+      "dest": "server.js"
+    },
+    {
+      "src": "/Core/Workout plan and Diet plan.html",
+      "dest": "server.js"
+    },
+    {
+      "src": "/About us/about us.html",
+      "dest": "server.js"
+    },
+    {
+      "handle": "filesystem"
     }
   ]
 }
