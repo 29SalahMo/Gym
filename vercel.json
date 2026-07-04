@@ -7,53 +7,12 @@
       "config": {
         "includeFiles": ["Home/**", "Core/**", "About us/**", "assets/**"]
       }
-    },
-    {
-      "src": "assets/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "Home/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "Core/**",
-      "use": "@vercel/static"
-    },
-    {
-      "src": "About us/**",
-      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/Home/contex.php",
-      "methods": ["POST"],
+      "src": "/(.*)",
       "dest": "server.js"
-    },
-    {
-      "src": "/Core/index.php",
-      "methods": ["POST"],
-      "dest": "server.js"
-    },
-    {
-      "src": "/",
-      "dest": "server.js"
-    },
-    {
-      "src": "/Home/assig.html",
-      "dest": "server.js"
-    },
-    {
-      "src": "/Core/Workout plan and Diet plan.html",
-      "dest": "server.js"
-    },
-    {
-      "src": "/About us/about us.html",
-      "dest": "server.js"
-    },
-    {
-      "handle": "filesystem"
     }
   ]
 }

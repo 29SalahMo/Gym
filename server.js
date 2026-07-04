@@ -85,6 +85,11 @@ function buildHeadMeta(req, { title, description }) {
   <meta name="twitter:image" content="${imageUrl}">`;
 }
 
+function getBaseHref(filePath) {
+  const dir = path.dirname(filePath).replace(/\\/g, '/');
+  return `/${dir}/`;
+}
+
 function serveHtmlPage(req, res, filePath, meta) {
   const absolutePath = path.join(__dirname, filePath);
   if (!fs.existsSync(absolutePath)) {
@@ -92,10 +97,11 @@ function serveHtmlPage(req, res, filePath, meta) {
   }
 
   const html = fs.readFileSync(absolutePath, 'utf8');
+  const baseTag = `<base href="${getBaseHref(filePath)}">`;
   const headMeta = buildHeadMeta(req, meta);
   const enriched = html.includes('</head>')
-    ? html.replace('</head>', `${headMeta}\n</head>`)
-    : `${headMeta}${html}`;
+    ? html.replace('</head>', `${baseTag}${headMeta}\n</head>`)
+    : `${baseTag}${headMeta}${html}`;
 
   res.type('html').send(enriched);
 }
