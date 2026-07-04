@@ -7,6 +7,7 @@ const bcrypt = require('bcryptjs');
 const app = express();
 const PORT = process.env.PORT || 8000;
 const isVercel = Boolean(process.env.VERCEL);
+const publicDir = path.join(__dirname, 'public');
 
 // Connect to SQLite Database (/tmp is writable on Vercel serverless)
 const dbPath = isVercel
@@ -85,11 +86,6 @@ function buildHeadMeta(req, { title, description }) {
   <meta name="twitter:image" content="${imageUrl}">`;
 }
 
-function getBaseHref(filePath) {
-  const dir = path.dirname(filePath).replace(/\\/g, '/');
-  return `/${dir}/`;
-}
-
 function serveHtmlPage(req, res, filePath, meta) {
   const absolutePath = path.join(__dirname, filePath);
   if (!fs.existsSync(absolutePath)) {
@@ -97,11 +93,10 @@ function serveHtmlPage(req, res, filePath, meta) {
   }
 
   const html = fs.readFileSync(absolutePath, 'utf8');
-  const baseTag = `<base href="${getBaseHref(filePath)}">`;
   const headMeta = buildHeadMeta(req, meta);
   const enriched = html.includes('</head>')
-    ? html.replace('</head>', `${baseTag}${headMeta}\n</head>`)
-    : `${baseTag}${headMeta}${html}`;
+    ? html.replace('</head>', `${headMeta}\n</head>`)
+    : `${headMeta}${html}`;
 
   res.type('html').send(enriched);
 }
@@ -109,19 +104,19 @@ function serveHtmlPage(req, res, filePath, meta) {
 const htmlPages = [
   {
     routes: ['/', '/Home/assig.html'],
-    file: 'Home/assig.html',
+    file: 'public/Home/assig.html',
     title: 'Gym Buddy - Free Workout & Diet Plans',
     description: 'Custom training routines, BMI calculator, and free diet plans to reach your fitness goals.'
   },
   {
     routes: ['/Core/Workout plan and Diet plan.html'],
-    file: 'Core/Workout plan and Diet plan.html',
+    file: 'public/Core/Workout plan and Diet plan.html',
     title: 'Workout & Diet Plan - Gym Buddy',
     description: 'Calculate your BMI and get personalized workout and diet recommendations for free.'
   },
   {
     routes: ['/About us/about us.html'],
-    file: 'About us/about us.html',
+    file: 'public/About us/about us.html',
     title: 'About Us - Gym Buddy',
     description: 'Learn about Gym Buddy and our mission to help people train and eat better for free.'
   }
@@ -133,8 +128,8 @@ htmlPages.forEach(({ routes, file, title, description }) => {
   });
 });
 
-// Serve static assets (CSS, JS, images — HTML is served above with meta tags)
-app.use(express.static(__dirname));
+// Serve static assets from public/ (CSS, JS, images)
+app.use(express.static(publicDir));
 
 // Intercept routing for PHP endpoints
 // 1. Home contex.php (Login / Signup)
@@ -194,7 +189,7 @@ app.post('/Home/contex.php', (req, res) => {
             </div>
             <script>
               setTimeout(() => {
-                window.location.href = 'assig.html';
+                window.location.href = '/Home/assig.html';
               }, 2000);
             </script>
           </body>
@@ -219,7 +214,7 @@ app.post('/Home/contex.php', (req, res) => {
               </div>
               <script>
                 setTimeout(() => {
-                  window.location.href = '../Core/Workout plan and Diet plan.html';
+                  window.location.href = '/Core/Workout plan and Diet plan.html';
                 }, 1500);
               </script>
             </body>
@@ -271,7 +266,7 @@ app.post('/Core/index.php', (req, res) => {
         <head>
           <meta charset="UTF-8">
           <meta name="viewport" content="width=device-width, initial-scale=1.0">
-          <link rel="stylesheet" href="style.css">
+          <link rel="stylesheet" href="/Core/style.css">
           <title>Member Registration Status</title>
         </head>
         <body style="padding: 40px; background: #0f172a; color: #f8fafc; font-family: 'Outfit', sans-serif;">
@@ -289,7 +284,7 @@ app.post('/Core/index.php', (req, res) => {
               `).join('')}
             </ul>
             <br><br>
-            <button onclick="window.location.href='Workout plan and Diet plan.html'" style="width: 100%; border: none; padding: 14px; border-radius: 12px; color: white; background: linear-gradient(135deg, #ff6b00 0%, #ff8e53 100%); font-weight: bold; font-size: 16px; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 107, 0, 0.4); transition: transform 0.2s;">Go Back</button>
+            <button onclick="window.location.href='/Core/Workout plan and Diet plan.html'" style="width: 100%; border: none; padding: 14px; border-radius: 12px; color: white; background: linear-gradient(135deg, #ff6b00 0%, #ff8e53 100%); font-weight: bold; font-size: 16px; cursor: pointer; box-shadow: 0 4px 15px rgba(255, 107, 0, 0.4); transition: transform 0.2s;">Go Back</button>
           </div>
         </body>
         </html>

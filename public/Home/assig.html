@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="myst1.css" />
-  <script src="interactions.js" defer></script>
+  <link rel="stylesheet" href="/Home/myst1.css" />
+  <script src="/Home/interactions.js" defer></script>
   <title>Gym buddy</title>
 </head>
 
@@ -20,15 +20,15 @@
   </svg>
 
   <nav>
-    <div class="logo"><a href="assig.html" style="text-decoration:none; color:inherit;">Gym buddy</a></div>
+    <div class="logo"><a href="/Home/assig.html" style="text-decoration:none; color:inherit;">Gym buddy</a></div>
 
     <span class="menubtn" onclick="openNav()">&#9776;</span>
 
     <div class="navLinks">
       <ul>
-        <li><a href="assig.html">Home</a></li>
-        <li><a href="../About us/about us.html">About Us</a></li>
-        <li><a href="../Core/Workout plan and Diet plan.html">BMI Calculator</a></li>
+        <li><a href="/Home/assig.html">Home</a></li>
+        <li><a href="/About us/about us.html">About Us</a></li>
+        <li><a href="/Core/Workout plan and Diet plan.html">BMI Calculator</a></li>
         <li><button class="open-button" onclick="openForm()">Login</button></li>
       </ul>
     </div>
@@ -40,24 +40,24 @@
         <h1 class="reveal-on-scroll">New lifestyle for free</h1>
         <p class="reveal-on-scroll reveal-delay-100">Go to our services now to start</p>
         <button class="cta-btn reveal-on-scroll reveal-delay-200"
-          onclick="window.location.href='../Core/Workout plan and Diet plan.html'">Start now</button>
+          onclick="window.location.href='/Core/Workout plan and Diet plan.html'">Start now</button>
       </div>
     </div>
   </div>
 
   <div class="features-grid">
     <div class="feature-card reveal-on-scroll">
-      <img src="lookinBodyWebHeroImgOpt.png" alt="Body Composition">
+      <img src="/Home/lookinBodyWebHeroImgOpt.png" alt="Body Composition">
       <h3>Body Analysis</h3>
       <p>Track metrics and understand your target body goals.</p>
     </div>
     <div class="feature-card reveal-on-scroll reveal-delay-100">
-      <img src="1131w-NRG2fNRtJVQ.webp" alt="Workout Planning">
+      <img src="/Home/1131w-NRG2fNRtJVQ.webp" alt="Workout Planning">
       <h3>Custom Training</h3>
       <p>Follow expert strength and aerobic routines for free.</p>
     </div>
     <div class="feature-card reveal-on-scroll reveal-delay-200">
-      <img src="diet-plan-cartoon-illustration-with-different-useful-dishes-menu-sheet-woman-hands_1284-28268.webp"
+      <img src="/Home/diet-plan-cartoon-illustration-with-different-useful-dishes-menu-sheet-woman-hands_1284-28268.webp"
         alt="Diet Planning">
       <h3>Dietary Support</h3>
       <p>Get custom recipes and meal plans tailored to your calculations.</p>
@@ -72,7 +72,7 @@
       <button class="auth-tab" id="tabSignup" onclick="setAuthMode('signup')">Sign Up</button>
     </div>
 
-    <form action="contex.php" method="post" class="form-container" id="authForm">
+    <form action="/Home/contex.php" method="post" class="form-container" id="authForm">
       <h1 id="authTitle">Member Login</h1>
 
       <input type="hidden" name="action" id="authAction" value="login">
