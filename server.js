@@ -52,6 +52,14 @@ function runMigrations() {
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// Serve static assets (HTML, CSS, JS, images)
+app.use(express.static(__dirname));
+
+// Default route fallback to homepage
+app.get('/', (req, res) => {
+  res.redirect('/Home/assig.html');
+});
+
 // Intercept routing for PHP endpoints
 // 1. Home contex.php (Login / Signup)
 app.post('/Home/contex.php', (req, res) => {
@@ -212,14 +220,6 @@ app.post('/Core/index.php', (req, res) => {
       `);
     });
   });
-});
-
-// Serve static assets
-app.use(express.static(__dirname));
-
-// Default route fallback to homepage
-app.get('/', (req, res) => {
-  res.redirect('/Home/assig.html');
 });
 
 module.exports = app;

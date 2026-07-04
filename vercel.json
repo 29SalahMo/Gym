@@ -3,13 +3,44 @@
   "builds": [
     {
       "src": "server.js",
-      "use": "@vercel/node"
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["Home/**", "Core/**", "About us/**"]
+      }
+    },
+    {
+      "src": "Home/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "Core/**",
+      "use": "@vercel/static"
+    },
+    {
+      "src": "About us/**",
+      "use": "@vercel/static"
     }
   ],
   "routes": [
     {
-      "src": "/(.*)",
+      "src": "/Home/contex.php",
+      "methods": ["POST"],
       "dest": "server.js"
+    },
+    {
+      "src": "/Core/index.php",
+      "methods": ["POST"],
+      "dest": "server.js"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/",
+      "status": 307,
+      "headers": {
+        "Location": "/Home/assig.html"
+      }
     }
   ]
 }
